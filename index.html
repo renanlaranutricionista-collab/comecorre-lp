@@ -184,6 +184,16 @@
     }
 
     /* ── DISTANCE CARDS ── */
+    .dist-section-title {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-family: 'Barlow', sans-serif;
+      font-weight: 500;
+    }
+
     .hero-right {
       display: flex;
       flex-direction: column;
@@ -200,8 +210,8 @@
       border-radius: 3px;
       transition: opacity 0.2s;
     }
-    .dist-row.r5  { border-color: rgba(255,255,255,0.2); }
-    .dist-row.r10 { border-color: rgba(255,255,255,0.2); }
+    .dist-row.r5  { border-color: rgba(255,255,255,0.6); }
+    .dist-row.r10 { border-color: #4a9eff; }
     .dist-row.r21 { border-color: var(--red); }
     .dist-row.r42 { border-color: var(--orange); }
 
@@ -211,8 +221,8 @@
       font-weight: 900;
       min-width: 56px;
     }
-    .r5  .dist-km { color: rgba(255,255,255,0.7); font-size: 22px; }
-    .r10 .dist-km { color: rgba(255,255,255,0.7); font-size: 22px; }
+    .r5  .dist-km { color: rgba(255,255,255,0.9); font-size: 22px; }
+    .r10 .dist-km { color: #4a9eff; font-size: 22px; }
     .r21 .dist-km { color: var(--red); }
     .r42 .dist-km { color: var(--orange); }
 
@@ -223,8 +233,8 @@
       font-weight: 700;
       text-transform: uppercase;
     }
-    .r5  .dist-name { color: rgba(255,255,255,0.75); }
-    .r10 .dist-name { color: rgba(255,255,255,0.75); }
+    .r5  .dist-name { color: rgba(255,255,255,0.9); }
+    .r10 .dist-name { color: #4a9eff; }
     .r21 .dist-name { color: var(--text); }
     .r42 .dist-name { color: var(--text); }
 
@@ -617,6 +627,7 @@
     </div>
 
     <div class="hero-right">
+      <div class="dist-section-title">Protocolos validados para qualquer distância de prova</div>
       <div class="dist-row r5">
         <span class="dist-km">5K</span>
         <div class="dist-info">
@@ -637,7 +648,6 @@
           <div class="dist-name">Meia Maratona</div>
           <div class="dist-time">1h a 2h30 de prova</div>
         </div>
-        <span class="dist-pill">Popular</span>
       </div>
       <div class="dist-row r42">
         <span class="dist-km">42K</span>
@@ -645,7 +655,6 @@
           <div class="dist-name">Maratona</div>
           <div class="dist-time">2h30 a 5h de prova</div>
         </div>
-        <span class="dist-pill">Novo</span>
       </div>
     </div>
   </div>
@@ -813,7 +822,7 @@
 <div class="cta-section" id="formulario">
   <h2 class="section-title" style="margin-bottom: 16px;">Pronto para<br><em>correr melhor?</em></h2>
   <p class="hero-desc">Protocolo criado por nutricionista que corre, pensado para cada corredor. No seu e-mail em minutos.</p>
-  <a href="https://pay.kiwify.com.br/xa43AmX" class="cta-btn">Gerar meu protocolo Come&Corre →</a>
+  <a href="SEU_LINK_DO_TALLY_AQUI" class="cta-btn">Gerar meu protocolo Come&Corre →</a>
   <p class="cta-guarantee" style="color: rgba(255,255,255,0.6); font-size: 14px;">Por apenas <strong style="color:#fff; font-size:18px;">R$ 47</strong> · Receba em minutos no seu e-mail</p>
 </div>
 
