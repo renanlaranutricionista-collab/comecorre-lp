@@ -1,951 +1,828 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plano 21K — Nutrição de Performance | Renan Lara</title>
-<meta name="description" content="Protocolo nutricional personalizado para corredores. Gerado por algoritmo clínico em minutos. Receba no seu e-mail.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Come&Corre — Nutrição de Corrida | Renan Lara</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #e63012;
+      --orange: #ff8c00;
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #161616;
+      --border: rgba(255,255,255,0.08);
+      --text: #ffffff;
+      --text-dim: #999999;
+      --text-muted: #555555;
+    }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-<style>
-/* ── Reset ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-img { display: block; max-width: 100%; }
+    html { scroll-behavior: smooth; }
 
-/* ── Tokens ── */
-:root {
-  --preto:      #0A0A0A;
-  --preto-mid:  #141414;
-  --preto-card: #1A1A1A;
-  --vermelho:   #E8342A;
-  --vermelho-d: #C2271F;
-  --branco:     #F5F0EB;
-  --cinza:      #888888;
-  --cinza-d:    #444444;
-  --borda:      rgba(255,255,255,0.08);
-  --fonte-display: 'Bebas Neue', sans-serif;
-  --fonte-body:    'DM Sans', sans-serif;
-  --fonte-mono:    'DM Mono', monospace;
-}
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-body {
-  background: var(--preto);
-  color: var(--branco);
-  font-family: var(--fonte-body);
-  font-size: 16px;
-  line-height: 1.6;
-  overflow-x: hidden;
-}
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 48px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
 
-/* ── Utilitários ── */
-.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-.tag {
-  display: inline-block;
-  font-family: var(--fonte-mono);
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--vermelho);
-  border: 1px solid var(--vermelho);
-  padding: 4px 12px;
-  border-radius: 2px;
-}
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+    }
 
-/* ── NAV ── */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 20px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
-  backdrop-filter: blur(4px);
-}
-.nav-logo {
-  font-family: var(--fonte-display);
-  font-size: 22px;
-  letter-spacing: 2px;
-  color: var(--branco);
-  text-decoration: none;
-}
-.nav-logo span { color: var(--vermelho); }
-.nav-cta {
-  background: var(--vermelho);
-  color: #fff;
-  font-family: var(--fonte-mono);
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-.nav-cta:hover { background: var(--vermelho-d); }
+    .nav-cta {
+      background: var(--red);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #c9280f; }
 
-/* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  padding: 120px 0 80px;
-}
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 80% 50%, rgba(232,52,42,0.12) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(232,52,42,0.06) 0%, transparent 60%);
-}
-.hero-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-.hero-inner {
-  position: relative;
-  z-index: 2;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-.hero-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 28px;
-  animation: fadeUp 0.8s ease both;
-}
-.hero-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--vermelho);
-  animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.4); }
-}
-.hero-eyebrow-text {
-  font-family: var(--fonte-mono);
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--cinza);
-}
-.hero-title {
-  font-family: var(--fonte-display);
-  font-size: clamp(72px, 12vw, 160px);
-  line-height: 0.9;
-  letter-spacing: -1px;
-  margin-bottom: 8px;
-  animation: fadeUp 0.8s 0.1s ease both;
-}
-.hero-title-red { color: var(--vermelho); display: block; }
-.hero-subtitle {
-  font-family: var(--fonte-display);
-  font-size: clamp(24px, 4vw, 48px);
-  letter-spacing: 4px;
-  color: var(--cinza);
-  margin-bottom: 32px;
-  animation: fadeUp 0.8s 0.2s ease both;
-}
-.hero-desc {
-  font-size: 18px;
-  color: rgba(245,240,235,0.7);
-  max-width: 520px;
-  line-height: 1.7;
-  margin-bottom: 48px;
-  animation: fadeUp 0.8s 0.3s ease both;
-}
-.hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  animation: fadeUp 0.8s 0.4s ease both;
-}
-.btn-primary {
-  background: var(--vermelho);
-  color: #fff;
-  font-family: var(--fonte-body);
-  font-size: 16px;
-  font-weight: 700;
-  padding: 18px 40px;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  position: relative;
-  overflow: hidden;
-}
-.btn-primary::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.1);
-  transform: translateX(-100%);
-  transition: transform 0.3s;
-}
-.btn-primary:hover::after { transform: translateX(0); }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(232,52,42,0.4); }
-.btn-arrow { font-size: 20px; transition: transform 0.2s; }
-.btn-primary:hover .btn-arrow { transform: translateX(4px); }
-.hero-price {
-  font-family: var(--fonte-mono);
-  font-size: 13px;
-  color: var(--cinza);
-}
-.hero-price strong { color: var(--branco); font-size: 18px; }
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
 
-.hero-stats {
-  display: flex;
-  gap: 48px;
-  margin-top: 80px;
-  padding-top: 48px;
-  border-top: 1px solid var(--borda);
-  animation: fadeUp 0.8s 0.5s ease both;
-  flex-wrap: wrap;
-}
-.stat-item {}
-.stat-num {
-  font-family: var(--fonte-display);
-  font-size: 48px;
-  color: var(--vermelho);
-  line-height: 1;
-}
-.stat-label {
-  font-size: 13px;
-  color: var(--cinza);
-  margin-top: 4px;
-  font-family: var(--fonte-mono);
-  letter-spacing: 1px;
-}
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse 60% 60% at 70% 50%, rgba(230,48,18,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 64px;
+    }
 
-/* ── COMO FUNCIONA ── */
-.section { padding: 100px 0; }
-.section-header { margin-bottom: 64px; }
-.section-title {
-  font-family: var(--fonte-display);
-  font-size: clamp(40px, 6vw, 80px);
-  line-height: 1;
-  margin-top: 16px;
-}
-.section-title span { color: var(--vermelho); }
+    .hero-left { flex: 1; }
 
-.steps {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2px;
-}
-.step {
-  background: var(--preto-card);
-  padding: 40px 32px;
-  border: 1px solid var(--borda);
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.3s;
-}
-.step:hover { border-color: var(--vermelho); }
-.step::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--vermelho);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s;
-}
-.step:hover::before { transform: scaleX(1); }
-.step-num {
-  font-family: var(--fonte-display);
-  font-size: 64px;
-  color: rgba(232,52,42,0.15);
-  line-height: 1;
-  margin-bottom: 16px;
-}
-.step-icon { font-size: 28px; margin-bottom: 16px; }
-.step-title {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.step-desc { font-size: 14px; color: var(--cinza); line-height: 1.6; }
+    .hero-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+    }
+    .hero-badge-text {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
 
-/* ── O QUE ESTÁ INCLUÍDO ── */
-.includes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2px;
-}
-.include-card {
-  background: var(--preto-card);
-  padding: 32px;
-  border: 1px solid var(--borda);
-  transition: all 0.3s;
-}
-.include-card:hover {
-  border-color: rgba(232,52,42,0.3);
-  background: rgba(232,52,42,0.04);
-}
-.include-icon {
-  width: 40px; height: 40px;
-  background: rgba(232,52,42,0.1);
-  border: 1px solid rgba(232,52,42,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  margin-bottom: 20px;
-}
-.include-title {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.include-desc { font-size: 14px; color: var(--cinza); line-height: 1.6; }
+    .hero-brand {
+      line-height: 0.88;
+      margin-bottom: 24px;
+    }
+    .hero-brand span {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(72px, 10vw, 112px);
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -1px;
+      text-transform: uppercase;
+    }
 
-/* ── PARA QUEM É ── */
-.forwhom {
-  background: var(--preto-mid);
-  border-top: 1px solid var(--borda);
-  border-bottom: 1px solid var(--borda);
-}
-.forwhom-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
-}
-@media (max-width: 768px) {
-  .forwhom-grid { grid-template-columns: 1fr; gap: 40px; }
-}
-.forwhom-list { list-style: none; }
-.forwhom-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--borda);
-  font-size: 16px;
-}
-.forwhom-item:last-child { border-bottom: none; }
-.forwhom-check {
-  width: 24px; height: 24px;
-  background: var(--vermelho);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.forwhom-right {}
-.forwhom-visual {
-  background: var(--preto-card);
-  border: 1px solid var(--borda);
-  padding: 40px;
-  position: relative;
-}
-.pdf-preview {
-  background: #1E1E1E;
-  border: 1px solid var(--borda);
-  padding: 24px;
-  font-family: var(--fonte-mono);
-  font-size: 12px;
-  color: var(--cinza);
-  line-height: 1.8;
-}
-.pdf-preview-header {
-  color: var(--vermelho);
-  font-size: 10px;
-  letter-spacing: 2px;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-}
-.pdf-line { display: flex; justify-content: space-between; }
-.pdf-line-val { color: var(--branco); }
-.pdf-divider { border: none; border-top: 1px solid var(--borda); margin: 12px 0; }
-.pdf-tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-.pdf-tag {
-  background: rgba(232,52,42,0.15);
-  color: var(--vermelho);
-  font-size: 10px;
-  padding: 3px 8px;
-  letter-spacing: 1px;
-}
+    .hero-tagline {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
 
-/* ── CIENTÍFICO ── */
-.science {
-  position: relative;
-  overflow: hidden;
-}
-.science-bg {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 50% 80% at 100% 50%, rgba(232,52,42,0.06) 0%, transparent 60%);
-}
-.science-refs {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2px;
-  margin-top: 48px;
-}
-.science-ref {
-  background: var(--preto-card);
-  border: 1px solid var(--borda);
-  padding: 28px;
-}
-.science-ref-year {
-  font-family: var(--fonte-mono);
-  font-size: 11px;
-  color: var(--vermelho);
-  letter-spacing: 2px;
-  margin-bottom: 8px;
-}
-.science-ref-title {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-.science-ref-desc { font-size: 12px; color: var(--cinza); line-height: 1.5; }
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 400px;
+      margin-bottom: 36px;
+    }
 
-/* ── NUTRICIONISTA ── */
-.nutri {
-  background: var(--preto-mid);
-  border-top: 1px solid var(--borda);
-}
-.nutri-grid {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 64px;
-  align-items: center;
-}
-@media (max-width: 768px) {
-  .nutri-grid { grid-template-columns: 1fr; gap: 32px; }
-}
-.nutri-avatar {
-  width: 200px; height: 200px;
-  border: 2px solid var(--vermelho);
-  background: var(--preto-card);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--fonte-display);
-  font-size: 80px;
-  color: var(--vermelho);
-  flex-shrink: 0;
-  position: relative;
-}
-.nutri-avatar::after {
-  content: 'CRN-3 64496';
-  position: absolute;
-  bottom: -32px;
-  left: 0; right: 0;
-  text-align: center;
-  font-family: var(--fonte-mono);
-  font-size: 10px;
-  color: var(--cinza);
-  letter-spacing: 2px;
-}
-.nutri-name {
-  font-family: var(--fonte-display);
-  font-size: clamp(32px, 5vw, 56px);
-  line-height: 1;
-  margin-bottom: 8px;
-}
-.nutri-title {
-  font-family: var(--fonte-mono);
-  font-size: 12px;
-  color: var(--vermelho);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
-.nutri-bio {
-  font-size: 16px;
-  color: rgba(245,240,235,0.7);
-  line-height: 1.8;
-  max-width: 560px;
-}
-.nutri-instagram {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 24px;
-  font-family: var(--fonte-mono);
-  font-size: 12px;
-  color: var(--cinza);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.nutri-instagram:hover { color: var(--branco); }
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
 
-/* ── CTA FINAL ── */
-.cta-final {
-  padding: 120px 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.cta-final-bg {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(232,52,42,0.1) 0%, transparent 70%);
-}
-.cta-final-inner { position: relative; z-index: 2; }
-.cta-final-title {
-  font-family: var(--fonte-display);
-  font-size: clamp(48px, 8vw, 100px);
-  line-height: 0.95;
-  margin-bottom: 24px;
-}
-.cta-final-title span { color: var(--vermelho); }
-.cta-final-sub {
-  font-size: 18px;
-  color: var(--cinza);
-  margin-bottom: 48px;
-  max-width: 480px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.cta-final-price {
-  font-family: var(--fonte-mono);
-  font-size: 13px;
-  color: var(--cinza);
-  margin-top: 20px;
-}
-.cta-final-price strong {
-  font-size: 32px;
-  color: var(--branco);
-  font-family: var(--fonte-display);
-  letter-spacing: 2px;
-}
-.cta-guarantee {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 32px;
-  font-size: 13px;
-  color: var(--cinza);
-  font-family: var(--fonte-mono);
-}
+    .cta-btn {
+      background: var(--red);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .cta-btn:hover { background: #c9280f; }
 
-/* ── FOOTER ── */
-footer {
-  border-top: 1px solid var(--borda);
-  padding: 40px 0;
-  text-align: center;
-  font-family: var(--fonte-mono);
-  font-size: 11px;
-  color: var(--cinza-d);
-  letter-spacing: 1px;
-}
-footer a { color: var(--cinza); text-decoration: none; }
+    .cta-price {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      white-space: nowrap;
+    }
+    .cta-price strong {
+      color: var(--text);
+      font-size: 22px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+    }
 
-/* ── TICKER ── */
-.ticker-wrap {
-  overflow: hidden;
-  background: var(--vermelho);
-  padding: 12px 0;
-  white-space: nowrap;
-}
-.ticker {
-  display: inline-flex;
-  animation: ticker 20s linear infinite;
-  gap: 48px;
-}
-.ticker-item {
-  font-family: var(--fonte-mono);
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.85);
-  display: flex;
-  align-items: center;
-  gap: 48px;
-}
-.ticker-sep { opacity: 0.4; }
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
+    /* ── DISTANCE CARDS ── */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 240px;
+    }
 
-/* ── SCROLL INDICATOR ── */
-.scroll-indicator {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  animation: fadeUp 1s 1s ease both;
-}
-.scroll-line {
-  width: 1px;
-  height: 48px;
-  background: linear-gradient(to bottom, var(--vermelho), transparent);
-  animation: scrollLine 2s ease infinite;
-}
-@keyframes scrollLine {
-  0% { transform: scaleY(0); transform-origin: top; }
-  50% { transform: scaleY(1); transform-origin: top; }
-  51% { transform: scaleY(1); transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
-}
-.scroll-text {
-  font-family: var(--fonte-mono);
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--cinza);
-  writing-mode: vertical-lr;
-}
-</style>
+    .dist-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      border: 1px solid;
+      border-radius: 3px;
+      transition: opacity 0.2s;
+    }
+    .dist-row.r5  { border-color: rgba(255,255,255,0.2); }
+    .dist-row.r10 { border-color: rgba(255,255,255,0.2); }
+    .dist-row.r21 { border-color: var(--red); }
+    .dist-row.r42 { border-color: var(--orange); }
+
+    .dist-km {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      min-width: 56px;
+    }
+    .r5  .dist-km { color: rgba(255,255,255,0.7); font-size: 22px; }
+    .r10 .dist-km { color: rgba(255,255,255,0.7); font-size: 22px; }
+    .r21 .dist-km { color: var(--red); }
+    .r42 .dist-km { color: var(--orange); }
+
+    .dist-info { flex: 1; }
+    .dist-name {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .r5  .dist-name { color: rgba(255,255,255,0.75); }
+    .r10 .dist-name { color: rgba(255,255,255,0.75); }
+    .r21 .dist-name { color: var(--text); }
+    .r42 .dist-name { color: var(--text); }
+
+    .dist-time {
+      font-size: 9px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 2px;
+    }
+
+    .dist-pill {
+      font-size: 8px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .r21 .dist-pill { background: rgba(230,48,18,0.12); color: var(--red); border: 1px solid rgba(230,48,18,0.25); }
+    .r42 .dist-pill { background: rgba(255,140,0,0.12); color: var(--orange); border: 1px solid rgba(255,140,0,0.25); }
+
+    /* ── STATS BAR ── */
+    .stats {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 48px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .stat { text-align: left; }
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      margin-top: 6px;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 80px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 10px;
+      color: var(--red);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      border: 1px solid var(--red);
+      padding: 4px 12px;
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 900;
+      line-height: 0.92;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+    }
+    .section-title em {
+      color: var(--red);
+      font-style: normal;
+    }
+
+    /* ── PARA QUEM É ── */
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .check-item:last-child { border-bottom: none; }
+
+    .check-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: 13px;
+    }
+
+    .check-text {
+      font-size: 16px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* ── O QUE VOCÊ RECEBE ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .card {
+      background: var(--bg2);
+      padding: 32px;
+    }
+
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .card-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── COMO FUNCIONA ── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+
+    .step-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 80px;
+      font-weight: 900;
+      color: rgba(230,48,18,0.4);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .step-icon { font-size: 24px; margin-bottom: 12px; display: block; }
+
+    .step-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* ── CIÊNCIA ── */
+    .science-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .science-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: 2px;
+    }
+
+    .science-source {
+      font-size: 10px;
+      color: var(--red);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .science-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .science-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* ── SOBRE ── */
+    .about-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-photo {
+      width: 200px;
+      height: 200px;
+      border: 1px solid var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 16px;
+    }
+
+    .about-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 36px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 4px;
+    }
+
+    .about-crn {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .about-desc {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 24px;
+    }
+
+    .about-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .about-tag {
+      font-size: 10px;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── CTA FINAL ── */
+    .cta-section {
+      text-align: center;
+      padding: 100px 48px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-section .section-title {
+      margin-bottom: 16px;
+    }
+
+    .cta-section .hero-desc {
+      max-width: 480px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .cta-section .cta-btn {
+      font-size: 16px;
+      padding: 20px 48px;
+    }
+
+    .cta-guarantee {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo img { height: 28px; }
+
+    .footer-text {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .hero { padding: 100px 20px 60px; }
+      .hero-inner { flex-direction: column; gap: 40px; }
+      .hero-right { width: 100%; }
+      .stats { padding: 32px 20px; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      section { padding: 60px 20px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; gap: 32px; }
+      .science-grid { grid-template-columns: 1fr; }
+      .about-inner { grid-template-columns: 1fr; gap: 32px; }
+      .cta-section { padding: 60px 20px; }
+      footer { padding: 24px 20px; flex-direction: column; gap: 12px; text-align: center; }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-badge  { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+    .hero-brand  { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
+    .hero-tagline{ animation: fadeUp 0.6s ease both; animation-delay: 0.3s; }
+    .hero-desc   { animation: fadeUp 0.6s ease both; animation-delay: 0.4s; }
+    .hero-cta-row{ animation: fadeUp 0.6s ease both; animation-delay: 0.5s; }
+    .hero-right  { animation: fadeUp 0.6s ease both; animation-delay: 0.6s; }
+  </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">PLANO<span>21K</span></a>
+  <div class="nav-logo">
+    <img src="logo-renan-lara.png" alt="Renan Lara — Nutri de Corredores">
+  </div>
   <a href="#formulario" class="nav-cta">Quero meu plano →</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
   <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <div class="hero-dot"></div>
-      <span class="hero-eyebrow-text">Protocolo Nutricional Personalizado</span>
-    </div>
-    <h1 class="hero-title">
-      PLANO
-      <span class="hero-title-red">21K</span>
-    </h1>
-    <p class="hero-subtitle">NUTRIÇÃO DE PERFORMANCE</p>
-    <p class="hero-desc">
-      Seu protocolo nutricional para a meia maratona, gerado por algoritmo clínico baseado no seu peso, pace e perfil. Receba em minutos no seu e-mail.
-    </p>
-    <div class="hero-actions">
-      <a href="#formulario" class="btn-primary">
-        Gerar meu protocolo
-        <span class="btn-arrow">→</span>
-      </a>
-      <div class="hero-price">
-        Por apenas <strong>R$ 47</strong>
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        <span class="hero-badge-text">Protocolo nutricional personalizado</span>
+      </div>
+      <div class="hero-brand">
+        <span>COME&</span>
+        <span style="color: var(--red);">CORRE</span>
+      </div>
+      <div class="hero-tagline">Nutrição de Corrida</div>
+      <p class="hero-desc">Protocolo criado por nutricionista que corre, pensado para cada corredor. No seu e-mail em minutos.</p>
+      <div class="hero-cta-row">
+        <a href="#formulario" class="cta-btn">Gerar meu protocolo Come&Corre →</a>
+        <span class="cta-price">Por apenas <strong>R$ 47</strong></span>
       </div>
     </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num">8+</div>
-        <div class="stat-label">Páginas de protocolo</div>
+
+    <div class="hero-right">
+      <div class="dist-row r5">
+        <span class="dist-km">5K</span>
+        <div class="dist-info">
+          <div class="dist-name">Curta distância</div>
+          <div class="dist-time">em torno de 30min de prova</div>
+        </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num">5min</div>
-        <div class="stat-label">Para preencher</div>
+      <div class="dist-row r10">
+        <span class="dist-km">10K</span>
+        <div class="dist-info">
+          <div class="dist-name">Média distância</div>
+          <div class="dist-time">30min a 1h de prova</div>
+        </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Baseado em evidência</div>
+      <div class="dist-row r21">
+        <span class="dist-km">21K</span>
+        <div class="dist-info">
+          <div class="dist-name">Meia Maratona</div>
+          <div class="dist-time">1h a 2h30 de prova</div>
+        </div>
+        <span class="dist-pill">Popular</span>
       </div>
-      <div class="stat-item">
-        <div class="stat-num">CRN</div>
-        <div class="stat-label">Nutricionista registrado</div>
+      <div class="dist-row r42">
+        <span class="dist-km">42K</span>
+        <div class="dist-info">
+          <div class="dist-name">Maratona</div>
+          <div class="dist-time">2h30 a 5h de prova</div>
+        </div>
+        <span class="dist-pill">Novo</span>
       </div>
     </div>
-  </div>
-  <div class="scroll-indicator">
-    <div class="scroll-line"></div>
-    <span class="scroll-text">scroll</span>
   </div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker">
-    <span class="ticker-item">
-      Protocolo personalizado <span class="ticker-sep">✦</span>
-      Baseado em ciência <span class="ticker-sep">✦</span>
-      Entregue em minutos <span class="ticker-sep">✦</span>
-      Training the Gut <span class="ticker-sep">✦</span>
-      Carbo-loading amador <span class="ticker-sep">✦</span>
-      Top 3 géis recomendados <span class="ticker-sep">✦</span>
-      Protocolo feminino <span class="ticker-sep">✦</span>
-      Sódio intra-prova <span class="ticker-sep">✦</span>
-    </span>
-    <span class="ticker-item" aria-hidden="true">
-      Protocolo personalizado <span class="ticker-sep">✦</span>
-      Baseado em ciência <span class="ticker-sep">✦</span>
-      Entregue em minutos <span class="ticker-sep">✦</span>
-      Training the Gut <span class="ticker-sep">✦</span>
-      Carbo-loading amador <span class="ticker-sep">✦</span>
-      Top 3 géis recomendados <span class="ticker-sep">✦</span>
-      Protocolo feminino <span class="ticker-sep">✦</span>
-      Sódio intra-prova <span class="ticker-sep">✦</span>
-    </span>
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">15+</div>
+    <div class="stat-label">Páginas de protocolo prático para correr mais rápido</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">5MIN</div>
+    <div class="stat-label">Para preencher</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Baseado em evidência</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">CRN</div>
+    <div class="stat-label">Nutricionista registrado</div>
   </div>
 </div>
 
-<!-- COMO FUNCIONA -->
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <span class="tag">Como funciona</span>
-      <h2 class="section-title">3 passos para seu <span>protocolo</span></h2>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-icon">📋</div>
-        <div class="step-title">Preencha o formulário</div>
-        <div class="step-desc">Responda perguntas sobre seu peso, pace, histórico com géis, restrições alimentares e data da prova. Leva menos de 5 minutos.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-icon">⚡</div>
-        <div class="step-title">Algoritmo calcula</div>
-        <div class="step-desc">Nosso motor clínico processa seus dados com base nas diretrizes ISSN e ACSM, calculando CHO/hora, hidratação, sódio e timing de géis.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-icon">📧</div>
-        <div class="step-title">Receba no e-mail</div>
-        <div class="step-desc">Em minutos seu PDF personalizado chega na caixa de entrada. Protocolo completo, pronto para imprimir ou salvar no celular.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- O QUE ESTÁ INCLUÍDO -->
-<section class="section" style="padding-top: 0;">
-  <div class="container">
-    <div class="section-header">
-      <span class="tag">O que está incluído</span>
-      <h2 class="section-title">Tudo que você precisa <span>saber</span></h2>
-    </div>
-    <div class="includes-grid">
-      <div class="include-card">
-        <div class="include-icon">🏃</div>
-        <div class="include-title">Plano de Abastecimento km a km</div>
-        <div class="include-desc">Tabela com cada gel, horário e quilômetro exato. Gel pré-largada, timing intra-prova e prescrição de sódio incluídos.</div>
-      </div>
-      <div class="include-card">
-        <div class="include-icon">🍝</div>
-        <div class="include-title">Carbo-Loading Personalizado</div>
-        <div class="include-desc">Protocolo de D-7 a D-1 com gramas de carboidrato por dia, alimentos recomendados e orientação de fibras.</div>
-      </div>
-      <div class="include-card">
-        <div class="include-icon">💊</div>
-        <div class="include-title">Top 3 Géis Recomendados</div>
-        <div class="include-desc">Tabela com as melhores opções para o seu perfil — CHO por sachê, sachês/hora, tipo (Dual-Source/Hidrogel) e link para compra.</div>
-      </div>
-      <div class="include-card">
-        <div class="include-icon">🧪</div>
-        <div class="include-title">Training the Gut</div>
-        <div class="include-desc">Progressão de adaptação gástrica calculada pelas semanas até sua prova. Do seu ponto atual até o protocolo de prova.</div>
-      </div>
-      <div class="include-card">
-        <div class="include-icon">☕</div>
-        <div class="include-title">Prescrição de Cafeína</div>
-        <div class="include-desc">Dosagem calculada pelo seu peso (3-6mg/kg), timing exato antes da largada e alertas de segurança personalizados.</div>
-      </div>
-      <div class="include-card">
-        <div class="include-icon">♀</div>
-        <div class="include-title">Protocolo Feminino</div>
-        <div class="include-desc">Para atletas femininas: orientações por fase do ciclo menstrual, ajuste de hidratação e carboidrato baseado em McNulty 2020.</div>
-      </div>
-      <div class="include-card">
-        <div class="include-icon">🏋</div>
-        <div class="include-title">Recuperação Pós-Prova</div>
-        <div class="include-desc">Janela de ouro pós-prova com CHO e proteína calculados, 3 opções práticas de refeição e reposição de sódio.</div>
-      </div>
-      <div class="include-card">
-        <div class="include-icon">🧠</div>
-        <div class="include-title">Preparo Mental</div>
-        <div class="include-desc">Técnicas de psicologia esportiva: auto-diálogo, respiração para largada, foco no processo e manejo da ansiedade pré-prova.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PARA QUEM É -->
-<section class="section forwhom">
-  <div class="container">
-    <div class="forwhom-grid">
-      <div>
-        <span class="tag">Para quem é</span>
-        <h2 class="section-title" style="margin-top: 16px; margin-bottom: 40px;">Este plano é <span>para você</span></h2>
-        <ul class="forwhom-list">
-          <li class="forwhom-item">
-            <div class="forwhom-check">✓</div>
-            <span>Você vai correr um 21k ou 42k e não sabe o que comer antes e durante</span>
-          </li>
-          <li class="forwhom-item">
-            <div class="forwhom-check">✓</div>
-            <span>Já passou mal de estômago em prova por causa de gel ou hidratação errada</span>
-          </li>
-          <li class="forwhom-item">
-            <div class="forwhom-check">✓</div>
-            <span>Quer bater seu recorde pessoal e sabe que nutrição faz a diferença</span>
-          </li>
-          <li class="forwhom-item">
-            <div class="forwhom-check">✓</div>
-            <span>Não tem tempo ou budget para consulta presencial mas quer orientação séria</span>
-          </li>
-          <li class="forwhom-item">
-            <div class="forwhom-check">✓</div>
-            <span>Quer um protocolo baseado em ciência, não em achismo de grupo de corrida</span>
-          </li>
-        </ul>
-      </div>
-      <div class="forwhom-right">
-        <div class="forwhom-visual">
-          <div style="font-family: var(--fonte-mono); font-size: 10px; color: var(--vermelho); letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase;">Preview do protocolo</div>
-          <div class="pdf-preview">
-            <div class="pdf-preview-header">// Plano 21K — Fabiana Araújo</div>
-            <div class="pdf-line"><span>Peso</span><span class="pdf-line-val">69.4 kg</span></div>
-            <div class="pdf-line"><span>Pace médio</span><span class="pdf-line-val">5:30/km</span></div>
-            <div class="pdf-line"><span>Tempo estimado</span><span class="pdf-line-val">1h52m</span></div>
-            <hr class="pdf-divider">
-            <div class="pdf-line"><span>CHO/hora</span><span class="pdf-line-val" style="color: var(--vermelho);">75g/h</span></div>
-            <div class="pdf-line"><span>Hidratação/hora</span><span class="pdf-line-val">600ml/h</span></div>
-            <div class="pdf-line"><span>Sódio/hora</span><span class="pdf-line-val">400mg/h</span></div>
-            <hr class="pdf-divider">
-            <div style="font-size: 10px; color: var(--cinza); margin-bottom: 8px;">Top 3 géis recomendados:</div>
-            <div class="pdf-tag-row">
-              <span class="pdf-tag">Pace It Hidrogel</span>
-              <span class="pdf-tag">Maurten Gel 100</span>
-              <span class="pdf-tag">Probiótica Carb Up</span>
-            </div>
-            <hr class="pdf-divider">
-            <div style="font-size: 10px; color: var(--cinza); margin-bottom: 8px;">Training the Gut — 8 semanas:</div>
-            <div class="pdf-line"><span>Fase 1 (S1-S2)</span><span class="pdf-line-val">40min entre géis</span></div>
-            <div class="pdf-line"><span>Fase 2 (S3-S5)</span><span class="pdf-line-val">30min entre géis</span></div>
-            <div class="pdf-line"><span>Fase 3 (S6-S8)</span><span class="pdf-line-val">20min entre géis</span></div>
-          </div>
-        </div>
-      </div>
+<section>
+  <div class="section-label">Para quem é</div>
+  <h2 class="section-title">Este plano é<br><em>para você que</em></h2>
+  <div class="checklist">
+    <div class="check-item">
+      <div class="check-icon">✓</div>
+      <span class="check-text">Vai correr um 5K, 10K, 21K ou 42K e não sabe o que comer antes e durante</span>
+    </div>
+    <div class="check-item">
+      <div class="check-icon">✓</div>
+      <span class="check-text">Já passou mal de estômago em prova por causa de gel ou hidratação errada</span>
+    </div>
+    <div class="check-item">
+      <div class="check-icon">✓</div>
+      <span class="check-text">Quer bater seu recorde pessoal e sabe que nutrição faz a diferença</span>
+    </div>
+    <div class="check-item">
+      <div class="check-icon">✓</div>
+      <span class="check-text">Não tem tempo ou orçamento para consulta presencial, mas quer orientação séria</span>
+    </div>
+    <div class="check-item">
+      <div class="check-icon">✓</div>
+      <span class="check-text">Quer um protocolo baseado em ciência — sem achismo, sem fazer você gastar dinheiro à toa</span>
     </div>
   </div>
 </section>
 
-<!-- CIENTÍFICO -->
-<section class="section science">
-  <div class="science-bg"></div>
-  <div class="container" style="position: relative; z-index: 2;">
-    <div class="section-header">
-      <span class="tag">Base científica</span>
-      <h2 class="section-title">Protocolado em <span>evidência</span></h2>
+<!-- O QUE VOCÊ RECEBE -->
+<section style="padding-top: 0;">
+  <div class="section-label">O que você recebe</div>
+  <h2 class="section-title">Tudo que você<br><em>precisa saber</em></h2>
+  <div class="cards-grid">
+    <div class="card">
+      <span class="card-icon">📍</span>
+      <div class="card-title">Plano de abastecimento</div>
+      <p class="card-desc">Km a km, o que tomar e quando. Gel, água e sal calculados para o seu pace e distância.</p>
     </div>
-    <p style="font-size: 16px; color: var(--cinza); max-width: 560px; line-height: 1.8;">
-      Cada cálculo do Plano 21K é baseado nas melhores diretrizes de nutrição esportiva publicadas. Sem achismo, sem bro-science.
-    </p>
-    <div class="science-refs">
-      <div class="science-ref">
-        <div class="science-ref-year">Jeukendrup · 2014</div>
-        <div class="science-ref-title">Janelas de CHO/hora</div>
-        <div class="science-ref-desc">30g, 60g e 90g/h conforme pace e duração. Base do cálculo dinâmico de carboidrato.</div>
-      </div>
-      <div class="science-ref">
-        <div class="science-ref-year">McNulty et al. · 2020</div>
-        <div class="science-ref-title">Ciclo Menstrual e Performance</div>
-        <div class="science-ref-desc">Efeito trivial na performance de endurance. Ajustes metabólicos reais sem nocebo.</div>
-      </div>
-      <div class="science-ref">
-        <div class="science-ref-year">Jeukendrup · 2017</div>
-        <div class="science-ref-title">Training the Gut</div>
-        <div class="science-ref-desc">Upregulation intestinal em 2 semanas de exposição. Base da progressão personalizada.</div>
-      </div>
-      <div class="science-ref">
-        <div class="science-ref-year">AIS · ACSM</div>
-        <div class="science-ref-title">Hiponatremia e Sódio</div>
-        <div class="science-ref-desc">Teto de hidratação por peso e pace. Prescrição de sódio intra-prova para provas acima de 90min.</div>
-      </div>
+    <div class="card">
+      <span class="card-icon">💊</span>
+      <div class="card-title">Top 5 géis recomendados</div>
+      <p class="card-desc">Tabela com as melhores opções para o seu perfil — CHO por sachê, sachês/hora, tipo (Dual-Source/Hidrogel) e link para compra.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🍽️</span>
+      <div class="card-title">Plano alimentar diário</div>
+      <p class="card-desc">Refeições montadas com gramas exatos, calculadas pelo seu peso e gasto energético real.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">☀️</span>
+      <div class="card-title">Manhã da prova</div>
+      <p class="card-desc">O que comer antes da largada — opções práticas com quantidades exatas para chegar abastecido e sem desconforto.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">☕</span>
+      <div class="card-title">Prescrição de suplementação personalizada</div>
+      <p class="card-desc">Dosagem calculada pelo seu peso, timing exato antes da largada e alertas de segurança personalizados.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">⚡</span>
+      <div class="card-title">Stack de suplementação</div>
+      <p class="card-desc">Bicarbonato, nitrato, creatina e proteína — o que faz sentido para o seu perfil, com links de compra e dosagem exata.</p>
     </div>
   </div>
 </section>
 
-<!-- NUTRICIONISTA -->
-<section class="section nutri">
-  <div class="container">
-    <div class="nutri-grid">
-      <div class="nutri-avatar">RL</div>
-      <div>
-        <span class="tag">Quem assina</span>
-        <h2 class="nutri-name" style="margin-top: 16px;">Renan Lara</h2>
-        <div class="nutri-title">Nutricionista Esportivo · CRN-3 64496</div>
-        <p class="nutri-bio">
-          Especialista em nutrição para corredores de endurance. O Plano 21K foi desenvolvido para democratizar o acesso a protocolos nutricionais sérios — baseados em ciência, sem o custo de uma consulta presencial.
-        </p>
-        <a href="https://instagram.com/nutrirenanlara" class="nutri-instagram" target="_blank">
-          ↗ @nutrirenanlara
-        </a>
+<!-- COMO FUNCIONA -->
+<section>
+  <div class="section-label">Como funciona</div>
+  <h2 class="section-title">Simples,<br><em>rápido e preciso</em></h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <span class="step-icon">📝</span>
+      <div class="step-title">Você preenche</div>
+      <p class="step-desc">5 minutos respondendo sobre seu peso, pace, distância, horário de treino e perfil de suor. Sem enrolação.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <span class="step-icon">⚡</span>
+      <div class="step-title">Calculamos e revisamos</div>
+      <p class="step-desc">Nosso motor clínico processa seus dados com base nas diretrizes ISSN e ACSM, calculando CHO/hora, hidratação, sódio e timing de géis.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <span class="step-icon">📩</span>
+      <div class="step-title">Você recebe</div>
+      <p class="step-desc">PDF completo no seu e-mail em minutos. Protocolo pronto para imprimir, salvar e executar no dia da prova.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CIÊNCIA -->
+<section style="padding-top: 0;">
+  <div class="section-label">Ciência aplicada</div>
+  <h2 class="section-title">Baseado em<br><em>evidência real</em></h2>
+  <div class="science-grid">
+    <div class="science-card">
+      <div class="science-source">ISSN · 2023</div>
+      <div class="science-title">CHO/hora</div>
+      <p class="science-desc">60–90g de carboidrato por hora para esforços acima de 1h. Transportadores duais para absorção máxima.</p>
+    </div>
+    <div class="science-card">
+      <div class="science-source">ACSM · 2021</div>
+      <div class="science-title">Hidratação</div>
+      <p class="science-desc">Reposição baseada na taxa de sudorese individual, clima e duração. Sem protocolo genérico de "beba X ml".</p>
+    </div>
+    <div class="science-card">
+      <div class="science-source">Jeukendrup · 2017</div>
+      <div class="science-title">Training the Gut</div>
+      <p class="science-desc">Adaptação intestinal progressiva — seu intestino aprende a absorver mais carbo em movimento, reduzindo desconforto gastrointestinal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section>
+  <div class="section-label">Quem fez isso</div>
+  <div class="about-inner">
+    <div class="about-photo">
+      <img src="logo-renan-lara.png" alt="Renan Lara">
+    </div>
+    <div class="about-content">
+      <div class="about-name">Renan Lara</div>
+      <div class="about-crn">Nutricionista · CRN-3 64496</div>
+      <p class="about-desc">Especialista em nutrição esportiva com foco em corrida de rua. Atendo corredores de todos os níveis — do 5K à maratona — com protocolos individualizados baseados em evidência científica.</p>
+      <p class="about-desc" style="margin-top: -8px;">Eu corro. Sei o que é chegar na reta final sem energia, ou parar na beira da pista com câimbra. O Come&Corre nasceu para que isso não aconteça com você.</p>
+      <div class="about-tags">
+        <span class="about-tag">Nutrição Esportiva</span>
+        <span class="about-tag">Corrida de Rua</span>
+        <span class="about-tag">Performance</span>
+        <span class="about-tag">ISSN</span>
+        <span class="about-tag">ACSM</span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CTA FINAL -->
-<section class="cta-final" id="formulario">
-  <div class="cta-final-bg"></div>
-  <div class="container cta-final-inner">
-    <span class="tag" style="margin-bottom: 24px; display: inline-block;">Comece agora</span>
-    <h2 class="cta-final-title">
-      Seu protocolo<br>
-      em <span>minutos</span>
-    </h2>
-    <p class="cta-final-sub">
-      Preencha o formulário, receba seu PDF personalizado e chegue na largada sabendo exatamente o que fazer.
-    </p>
-    <a href="SEU_LINK_DO_TALLY_OU_TYPEBOT_AQUI" class="btn-primary" style="font-size: 18px; padding: 20px 48px;">
-      Gerar meu Plano 21K
-      <span class="btn-arrow">→</span>
-    </a>
-    <div class="cta-final-price">
-      Protocolo completo por <strong>R$ 47</strong>
-    </div>
-    <div class="cta-guarantee">
-      ✓ &nbsp; PDF entregue em minutos no seu e-mail
-    </div>
-  </div>
-</section>
+<div class="cta-section" id="formulario">
+  <h2 class="section-title" style="margin-bottom: 16px;">Pronto para<br><em>correr melhor?</em></h2>
+  <p class="hero-desc">Protocolo criado por nutricionista que corre, pensado para cada corredor. No seu e-mail em minutos.</p>
+  <a href="SEU_LINK_DO_TALLY_AQUI" class="cta-btn">Gerar meu protocolo Come&Corre →</a>
+  <p class="cta-guarantee" style="color: rgba(255,255,255,0.6); font-size: 14px;">Por apenas <strong style="color:#fff; font-size:18px;">R$ 47</strong> · Receba em minutos no seu e-mail</p>
+</div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="container">
-    <p style="margin-bottom: 8px;">
-      © 2026 Nutri Endurance · Nutricionista Renan Lara · CRN-3 64496
-    </p>
-    <p>
-      Este material é informativo e educacional. Não substitui avaliação clínica individualizada. ·
-      <a href="https://instagram.com/nutrirenanlara">@nutrirenanlara</a>
-    </p>
+  <div class="footer-logo">
+    <img src="logo-renan-lara.png" alt="Renan Lara">
   </div>
+  <div class="footer-text">© 2026 Renan Lara · CRN-3 64496 · Nutricionista de Corredores</div>
 </footer>
 
 </body>
