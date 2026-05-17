@@ -122,9 +122,12 @@
       line-height: 0.85;
       text-transform: uppercase;
       letter-spacing: -2px;
-      flex: 1;
       display: flex;
       align-items: center;
+    }
+
+    .flow-section:not(.flow-section-01) .flow-title {
+      flex: 1;
     }
 
     .flow-section-01 .flow-title { color: #fff; }
@@ -207,6 +210,35 @@
       display: flex;
       align-items: center;
       gap: 8px;
+    }
+
+    .flow-section-01-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+      gap: 40px;
+    }
+
+    .flow-hero-logo {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .flow-hero-logo img {
+      max-height: 55vh;
+      max-width: 40vw;
+      width: auto;
+      object-fit: contain;
+      opacity: 0.92;
+      animation: fadeUp 0.7s ease both 0.4s;
+    }
+
+    @media (max-width: 768px) {
+      .flow-section-01-body { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .flow-hero-logo img { max-height: 28vh; max-width: 70vw; }
     }
 
     .flow-scroll-hint::after {
@@ -844,7 +876,12 @@
   <!-- 01 — Quem é você -->
   <div class="flow-section flow-section-01">
     <div class="flow-eyebrow">01 — Come&Corre · Nutrição de Corrida</div>
-    <div class="flow-title">Corra<br>mais<br>rápido.</div>
+    <div class="flow-section-01-body">
+      <div class="flow-title">Corra<br>mais<br>rápido.</div>
+      <div class="flow-hero-logo">
+        <img src="logo-new.png" alt="Come&Corre">
+      </div>
+    </div>
     <div class="flow-hr"></div>
     <div class="flow-bottom">
       <p class="flow-desc">Protocolo nutricional personalizado criado por nutricionista que corre. Para quem quer bater o PR sem passar mal na prova.</p>
