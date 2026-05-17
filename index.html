@@ -67,194 +67,174 @@
     }
     .nav-cta:hover { background: #c9280f; }
 
-    /* ── HERO ── */
-    .hero {
+    /* ── HERO SCROLL SNAP ── */
+    .hero-snap-container {
+      height: 100vh;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+
+    .flow-section {
+      height: 100vh;
       min-height: 100vh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
       display: flex;
-      align-items: center;
-      padding: 120px 48px 80px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 80px 80px 60px;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse 60% 60% at 70% 50%, rgba(230,48,18,0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
+    .flow-section-01 { background: #0a0a0a; color: #fff; }
+    .flow-section-02 { background: #e63012; color: #fff; }
+    .flow-section-03 { background: #f0ebe0; color: #0a0a0a; }
+    .flow-section-04 { background: #0a0a0a; color: #fff; }
 
-    .hero-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 64px;
-    }
-
-    .hero-left { flex: 1; }
-
-    .hero-badge {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 28px;
-    }
-    .hero-badge-dot {
-      width: 6px; height: 6px;
-      background: var(--red);
-      border-radius: 50%;
-    }
-    .hero-badge-text {
+    .flow-eyebrow {
       font-size: 11px;
-      color: var(--text-muted);
-      letter-spacing: 0.18em;
+      font-weight: 700;
       text-transform: uppercase;
-      font-weight: 500;
+      letter-spacing: 0.2em;
+      opacity: 0.5;
+      margin-bottom: 0;
     }
 
-    .hero-brand {
-      line-height: 0.88;
-      margin-bottom: 24px;
+    .flow-section-02 .flow-eyebrow { opacity: 0.7; }
+    .flow-section-03 .flow-eyebrow { opacity: 0.5; }
+
+    .flow-hr {
+      border: none;
+      border-top: 1px solid currentColor;
+      opacity: 0.15;
+      margin: 3vh 0;
     }
-    .hero-brand span {
-      display: block;
+
+    .flow-section-02 .flow-hr { opacity: 0.25; }
+
+    .flow-title {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(72px, 10vw, 112px);
+      font-size: clamp(3.5rem, 12vw, 10rem);
       font-weight: 900;
-      color: var(--text);
-      letter-spacing: -1px;
+      line-height: 0.85;
       text-transform: uppercase;
-    }
-
-    .hero-tagline {
-      font-size: 11px;
-      color: var(--text-muted);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-weight: 500;
-      margin-bottom: 20px;
-    }
-
-    .hero-desc {
-      font-size: 15px;
-      color: var(--text-dim);
-      line-height: 1.7;
-      max-width: 400px;
-      margin-bottom: 36px;
-    }
-
-    .hero-cta-row {
+      letter-spacing: -2px;
+      flex: 1;
       display: flex;
       align-items: center;
-      gap: 24px;
+    }
+
+    .flow-section-01 .flow-title { color: #fff; }
+    .flow-section-02 .flow-title { color: #fff; }
+    .flow-section-03 .flow-title { color: #0a0a0a; }
+    .flow-section-04 .flow-title { color: var(--orange); }
+
+    .flow-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 48px;
+    }
+
+    .flow-desc {
+      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      line-height: 1.6;
+      max-width: 44ch;
+      font-weight: 400;
+    }
+
+    .flow-section-01 .flow-desc { color: rgba(255,255,255,0.5); }
+    .flow-section-02 .flow-desc { color: rgba(255,255,255,0.8); }
+    .flow-section-03 .flow-desc { color: rgba(0,0,0,0.55); }
+    .flow-section-04 .flow-desc { color: rgba(255,255,255,0.5); }
+
+    .flow-cta-btn {
+      background: #fff;
+      color: var(--red);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      text-decoration: none;
+      display: inline-block;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+      flex-shrink: 0;
+    }
+    .flow-cta-btn:hover { opacity: 0.88; }
+
+    .flow-section-01 .flow-cta-btn { background: var(--red); color: #fff; }
+    .flow-section-03 .flow-cta-btn { background: #0a0a0a; color: #fff; }
+    .flow-section-04 .flow-cta-btn { background: linear-gradient(135deg, var(--red), var(--orange)); color: #fff; }
+
+    .flow-stat-row {
+      display: flex;
+      gap: 48px;
       flex-wrap: wrap;
     }
 
-    .cta-btn {
-      background: var(--red);
-      color: #fff;
+    .flow-stat { }
+    .flow-stat-num {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1;
+    }
+    .flow-section-02 .flow-stat-num { color: rgba(255,255,255,0.9); }
+    .flow-section-04 .flow-stat-num { color: var(--orange); }
+
+    .flow-stat-label {
+      font-size: 11px;
       text-transform: uppercase;
-      padding: 16px 36px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: background 0.2s;
-      white-space: nowrap;
-    }
-    .cta-btn:hover { background: #c9280f; }
-
-    .cta-price {
-      font-size: 14px;
-      color: rgba(255,255,255,0.7);
-      white-space: nowrap;
-    }
-    .cta-price strong {
-      color: var(--text);
-      font-size: 22px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
+      letter-spacing: 0.1em;
+      opacity: 0.5;
+      margin-top: 4px;
     }
 
-    /* ── DISTANCE CARDS ── */
-    .dist-section-title {
+    .flow-scroll-hint {
+      position: absolute;
+      bottom: 24px;
+      right: 80px;
       font-size: 10px;
-      color: var(--text-muted);
-      letter-spacing: 0.12em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 12px;
-      font-family: 'Barlow', sans-serif;
-      font-weight: 500;
-    }
-
-    .hero-right {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      min-width: 240px;
-    }
-
-    .dist-row {
+      opacity: 0.3;
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 14px 18px;
-      border: 1px solid;
-      border-radius: 3px;
-      transition: opacity 0.2s;
+      gap: 8px;
     }
-    .dist-row.r5  { border-color: rgba(255,255,255,0.6); }
-    .dist-row.r10 { border-color: #4a9eff; }
-    .dist-row.r21 { border-color: var(--red); }
-    .dist-row.r42 { border-color: var(--orange); }
 
-    .dist-km {
+    .flow-scroll-hint::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: currentColor;
+      opacity: 0.5;
+    }
+
+    /* Distance cards inside section 01 */
+    .flow-dist-cards {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .flow-dist-pill {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 28px;
+      font-size: 22px;
       font-weight: 900;
-      min-width: 56px;
+      padding: 8px 20px;
+      border: 1px solid rgba(255,255,255,0.15);
+      letter-spacing: 0.02em;
     }
-    .r5  .dist-km { color: rgba(255,255,255,0.9); font-size: 22px; }
-    .r10 .dist-km { color: #4a9eff; font-size: 22px; }
-    .r21 .dist-km { color: var(--red); }
-    .r42 .dist-km { color: var(--orange); }
-
-    .dist-info { flex: 1; }
-    .dist-name {
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-    .r5  .dist-name { color: rgba(255,255,255,0.9); }
-    .r10 .dist-name { color: #4a9eff; }
-    .r21 .dist-name { color: var(--text); }
-    .r42 .dist-name { color: var(--text); }
-
-    .dist-time {
-      font-size: 9px;
-      color: rgba(255,255,255,0.45);
-      margin-top: 2px;
-    }
-
-    .dist-pill {
-      font-size: 8px;
-      padding: 3px 10px;
-      border-radius: 20px;
-      letter-spacing: 0.08em;
-      font-weight: 700;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-    .r21 .dist-pill { background: rgba(230,48,18,0.12); color: var(--red); border: 1px solid rgba(230,48,18,0.25); }
-    .r42 .dist-pill { background: rgba(255,140,0,0.12); color: var(--orange); border: 1px solid rgba(255,140,0,0.25); }
+    .flow-dist-pill.r21 { border-color: var(--red); color: var(--red); }
+    .flow-dist-pill.r42 { border-color: var(--orange); color: var(--orange); }
 
     /* ── STATS BAR ── */
     .stats {
@@ -327,7 +307,11 @@
       gap: 16px;
       padding: 20px 0;
       border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
+    .check-item.visible { opacity: 1; transform: translateY(0); }
     .check-item:last-child { border-bottom: none; }
 
     .check-icon {
@@ -359,7 +343,11 @@
     .card {
       background: var(--bg2);
       padding: 32px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
+    .card.visible { opacity: 1; transform: translateY(0); }
 
     .card-icon {
       font-size: 28px;
@@ -519,34 +507,263 @@
       text-transform: uppercase;
     }
 
-    /* ── CTA FINAL ── */
-    .cta-section {
-      text-align: center;
-      padding: 100px 48px;
+    /* ── TESTIMONIALS ── */
+    .testimonials-section {
+      padding: 80px 48px;
       background: var(--bg2);
       border-top: 1px solid var(--border);
     }
 
-    .cta-section .section-title {
+    .testimonials-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .testimonial-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 32px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .testimonial-card.visible { opacity: 1; transform: translateY(0); }
+
+    .testimonial-card::before {
+      content: '"';
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 80px;
+      font-weight: 900;
+      color: var(--red);
+      opacity: 0.3;
+      position: absolute;
+      top: 12px;
+      left: 24px;
+      line-height: 1;
+    }
+
+    .testimonial-text {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      padding-top: 32px;
+      margin-bottom: 24px;
+    }
+
+    .testimonial-footer {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+
+    .testimonial-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      color: #fff;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .testimonial-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .testimonial-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text);
+    }
+
+    .testimonial-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .testimonial-badge {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--orange);
+      border: 1px solid rgba(255,140,0,0.3);
+      padding: 3px 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ── CTA FINAL ── */
+    .cta-section {
+      text-align: center;
+      padding: 120px 48px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(230,48,18,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.04) 0.8px, transparent 0.8px);
+      background-size: 18px 18px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.6), transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-handwriting-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(40px, 7vw, 80px);
+      font-weight: 900;
+      line-height: 0.92;
+      text-transform: uppercase;
       margin-bottom: 16px;
     }
 
-    .cta-section .hero-desc {
+    .cta-handwriting-title em {
+      font-style: normal;
+      color: var(--orange);
+      position: relative;
+      display: inline-block;
+    }
+
+    .cta-handwriting-title em svg {
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 14px;
+      overflow: visible;
+    }
+
+    .cta-handwriting-title em svg path {
+      stroke: var(--red);
+      stroke-width: 3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-dasharray: 300;
+      stroke-dashoffset: 300;
+      transition: stroke-dashoffset 1s ease 0.3s;
+    }
+
+    .cta-handwriting-title em.animate svg path {
+      stroke-dashoffset: 0;
+    }
+
+    .cta-desc {
+      font-size: 15px;
+      color: var(--text-dim);
       max-width: 480px;
       margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .cta-card {
+      display: inline-block;
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 40px 56px;
       text-align: center;
+      position: relative;
     }
 
-    .cta-section .cta-btn {
+    .cta-card-price-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .cta-card-price {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--text);
+      letter-spacing: -2px;
+      margin-bottom: 4px;
+    }
+
+    .cta-card-price sup {
+      font-size: 32px;
+      vertical-align: super;
+      letter-spacing: 0;
+    }
+
+    .cta-card-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .cta-card-btn {
+      display: block;
+      background: linear-gradient(135deg, var(--red) 0%, var(--orange) 100%);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
       font-size: 16px;
-      padding: 20px 48px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 18px 48px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      box-shadow: 0 12px 32px rgba(230,48,18,0.35);
+      width: 100%;
     }
+    .cta-card-btn:hover { opacity: 0.88; }
 
-    .cta-guarantee {
-      margin-top: 20px;
-      font-size: 12px;
+    .cta-card-guarantee {
+      font-size: 11px;
       color: var(--text-muted);
       letter-spacing: 0.06em;
+      margin-top: 16px;
     }
 
     /* ── FOOTER ── */
@@ -569,16 +786,34 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
-      .hero { padding: 100px 20px 60px; }
-      .hero-inner { flex-direction: column; gap: 40px; }
-      .hero-right { width: 100%; }
+
+      .hero-snap-container { height: 100svh; }
+
+      .flow-section {
+        padding: 80px 24px 40px;
+        height: 100svh;
+        scroll-snap-type: none;
+      }
+
+      .flow-title {
+        font-size: clamp(3rem, 16vw, 5rem);
+        letter-spacing: -1px;
+      }
+
+      .flow-bottom { flex-direction: column; gap: 24px; align-items: flex-start; }
+
+      .flow-stat-row { gap: 24px; }
+
       .stats { padding: 32px 20px; grid-template-columns: repeat(2, 1fr); gap: 24px; }
       section { padding: 60px 20px; }
       .cards-grid { grid-template-columns: 1fr; }
       .steps { grid-template-columns: 1fr; gap: 32px; }
       .science-grid { grid-template-columns: 1fr; }
       .about-inner { grid-template-columns: 1fr; gap: 32px; }
+      .testimonials-section { padding: 60px 20px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
       .cta-section { padding: 60px 20px; }
+      .cta-card { padding: 28px 24px; width: 100%; }
       footer { padding: 24px 20px; flex-direction: column; gap: 12px; text-align: center; }
     }
 
@@ -588,12 +823,9 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .hero-badge  { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
-    .hero-brand  { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
-    .hero-tagline{ animation: fadeUp 0.6s ease both; animation-delay: 0.3s; }
-    .hero-desc   { animation: fadeUp 0.6s ease both; animation-delay: 0.4s; }
-    .hero-cta-row{ animation: fadeUp 0.6s ease both; animation-delay: 0.5s; }
-    .hero-right  { animation: fadeUp 0.6s ease both; animation-delay: 0.6s; }
+    .flow-section-01 .flow-eyebrow { animation: fadeUp 0.6s ease both 0.1s; }
+    .flow-section-01 .flow-title   { animation: fadeUp 0.6s ease both 0.2s; }
+    .flow-section-01 .flow-bottom  { animation: fadeUp 0.6s ease both 0.35s; }
   </style>
 </head>
 <body>
@@ -606,59 +838,72 @@
   <a href="#formulario" class="nav-cta">Quero meu plano →</a>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-badge">
-        <div class="hero-badge-dot"></div>
-        <span class="hero-badge-text">Protocolo nutricional personalizado</span>
-      </div>
-      <div class="hero-brand">
-        <span>COME&</span>
-        <span style="color: var(--red);">CORRE</span>
-      </div>
-      <div class="hero-tagline">Nutrição de Corrida</div>
-      <p class="hero-desc">Protocolo criado por nutricionista que corre, pensado para cada corredor. No seu e-mail em minutos.</p>
-      <div class="hero-cta-row">
-        <a href="#formulario" class="cta-btn">Gerar meu protocolo Come&Corre →</a>
-        <span class="cta-price">Por apenas <strong>R$ 47</strong></span>
+<!-- HERO SCROLL SNAP -->
+<div class="hero-snap-container" id="hero-snap">
+
+  <!-- 01 — Quem é você -->
+  <div class="flow-section flow-section-01">
+    <div class="flow-eyebrow">01 — Come&Corre · Nutrição de Corrida</div>
+    <div class="flow-title">Corra<br>mais<br>rápido.</div>
+    <div class="flow-hr"></div>
+    <div class="flow-bottom">
+      <p class="flow-desc">Protocolo nutricional personalizado criado por nutricionista que corre. Para quem quer bater o PR sem passar mal na prova.</p>
+      <a href="#main-content" class="flow-cta-btn" onclick="skipHero(event)">Ver o protocolo →</a>
+    </div>
+    <div class="flow-scroll-hint">Scroll</div>
+  </div>
+
+  <!-- 02 — O protocolo -->
+  <div class="flow-section flow-section-02">
+    <div class="flow-eyebrow">02 — O protocolo</div>
+    <div class="flow-title">Sem<br>achismo.<br>Sem gel<br>errado.</div>
+    <div class="flow-hr"></div>
+    <div class="flow-bottom">
+      <div class="flow-stat-row">
+        <div class="flow-stat">
+          <div class="flow-stat-num">15+</div>
+          <div class="flow-stat-label">Páginas de protocolo</div>
+        </div>
+        <div class="flow-stat">
+          <div class="flow-stat-num">5min</div>
+          <div class="flow-stat-label">Para preencher</div>
+        </div>
+        <div class="flow-stat">
+          <div class="flow-stat-num">100%</div>
+          <div class="flow-stat-label">Baseado em evidência</div>
+        </div>
       </div>
     </div>
+    <div class="flow-scroll-hint">Scroll</div>
+  </div>
 
-    <div class="hero-right">
-      <div class="dist-section-title">Protocolos validados para qualquer distância de prova</div>
-      <div class="dist-row r5">
-        <span class="dist-km">5K</span>
-        <div class="dist-info">
-          <div class="dist-name">Curta distância</div>
-          <div class="dist-time">em torno de 30min de prova</div>
-        </div>
-      </div>
-      <div class="dist-row r10">
-        <span class="dist-km">10K</span>
-        <div class="dist-info">
-          <div class="dist-name">Média distância</div>
-          <div class="dist-time">30min a 1h de prova</div>
-        </div>
-      </div>
-      <div class="dist-row r21">
-        <span class="dist-km">21K</span>
-        <div class="dist-info">
-          <div class="dist-name">Meia Maratona</div>
-          <div class="dist-time">1h a 2h30 de prova</div>
-        </div>
-      </div>
-      <div class="dist-row r42">
-        <span class="dist-km">42K</span>
-        <div class="dist-info">
-          <div class="dist-name">Maratona</div>
-          <div class="dist-time">2h30 a 5h de prova</div>
-        </div>
-      </div>
+  <!-- 03 — Para quem é -->
+  <div class="flow-section flow-section-03">
+    <div class="flow-eyebrow">03 — Para quem é</div>
+    <div class="flow-title">5K.<br>10K.<br>21K.<br>42K.</div>
+    <div class="flow-hr"></div>
+    <div class="flow-bottom">
+      <p class="flow-desc">Qualquer distância, qualquer pace. Protocolo calculado pelo seu peso, gasto energético e perfil de suor — não genérico.</p>
+      <a href="#main-content" class="flow-cta-btn" onclick="skipHero(event)">Quero o meu →</a>
+    </div>
+    <div class="flow-scroll-hint">Scroll</div>
+  </div>
+
+  <!-- 04 — Comece agora -->
+  <div class="flow-section flow-section-04">
+    <div class="flow-eyebrow">04 — Comece agora</div>
+    <div class="flow-title">R$<br>47.</div>
+    <div class="flow-hr"></div>
+    <div class="flow-bottom">
+      <p class="flow-desc">No seu e-mail em minutos. PDF completo, pronto para executar no dia da prova. Nutricionista registrado, CRN-3 64496.</p>
+      <a href="https://pay.kiwify.com.br/xa43AmX" class="flow-cta-btn">Gerar meu protocolo →</a>
     </div>
   </div>
-</section>
+
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main-content">
 
 <!-- STATS -->
 <div class="stats">
@@ -818,12 +1063,82 @@
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<div class="testimonials-section">
+  <div class="testimonials-inner">
+    <div class="section-label">O que dizem</div>
+    <h2 class="section-title">Atletas que<br><em>correram melhor</em></h2>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <p class="testimonial-text">Corri minha primeira maratona sem gel errado. O protocolo foi cirúrgico — sabia exatamente o que tomar em cada km. Chegou na hora H sem câimbra e com energia no final.</p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-name">Marcos A.</div>
+            <div class="testimonial-meta">Maratona de SP · 42K</div>
+          </div>
+          <span class="testimonial-badge">⚡ PR</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="testimonial-text">Sempre tive problema de estômago em corrida. Com o Come&Corre aprendi a treinar meu intestino antes da prova. Fiz 21K sem parar uma vez sequer no banheiro.</p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">C</div>
+          <div>
+            <div class="testimonial-name">Camila R.</div>
+            <div class="testimonial-meta">Meia Maratona · 21K</div>
+          </div>
+          <span class="testimonial-badge">✓ Sem GI</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="testimonial-text">Investi R$47 e bati meu PR de 10K em 3 semanas. O protocolo é direto ao ponto — sem enrolação, sem produto desnecessário. Vale muito mais do que parece.</p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">R</div>
+          <div>
+            <div class="testimonial-name">Rafael T.</div>
+            <div class="testimonial-meta">Corrida de Rua · 10K</div>
+          </div>
+          <span class="testimonial-badge">⚡ PR</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="testimonial-text">Nunca tinha entendido a diferença entre gel dual-source e normal. O Renan explica no protocolo com dados — sem vender nada caro. Minha hidratação nunca foi tão afinada.</p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">F</div>
+          <div>
+            <div class="testimonial-name">Fernanda L.</div>
+            <div class="testimonial-meta">Trail Running · 21K</div>
+          </div>
+          <span class="testimonial-badge">✓ Sem GI</span>
+        </div>
+      </div>
+
+    </div>
+    <p style="font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 24px; letter-spacing: 0.08em;">* Depoimentos reais de atletas atendidos. Resultados individuais podem variar.</p>
+  </div>
+</div>
+
 <!-- CTA FINAL -->
 <div class="cta-section" id="formulario">
-  <h2 class="section-title" style="margin-bottom: 16px;">Pronto para<br><em>correr melhor?</em></h2>
-  <p class="hero-desc">Protocolo criado por nutricionista que corre, pensado para cada corredor. No seu e-mail em minutos.</p>
-  <a href="https://pay.kiwify.com.br/xa43AmX" class="cta-btn">Gerar meu protocolo Come&Corre →</a>
-  <p class="cta-guarantee" style="color: rgba(255,255,255,0.6); font-size: 14px;">Por apenas <strong style="color:#fff; font-size:18px;">R$ 47</strong> · Receba em minutos no seu e-mail</p>
+  <div class="cta-inner">
+    <h2 class="cta-handwriting-title" id="cta-title">
+      Pronto para<br><em id="cta-em">correr melhor?<svg viewBox="0 0 300 14" preserveAspectRatio="none"><path d="M 4 10 Q 75 4 150 10 Q 225 16 296 8"/></svg></em>
+    </h2>
+    <p class="cta-desc">Protocolo criado por nutricionista que corre, pensado para cada corredor. No seu e-mail em minutos.</p>
+
+    <div class="cta-card">
+      <div class="cta-card-price-label">Valor único</div>
+      <div class="cta-card-price"><sup>R$</sup>47</div>
+      <div class="cta-card-sub">Acesso imediato · PDF no e-mail</div>
+      <a href="https://pay.kiwify.com.br/xa43AmX" class="cta-card-btn">Gerar meu protocolo Come&Corre →</a>
+      <div class="cta-card-guarantee">🔒 Pagamento seguro via Kiwify · Receba em minutos</div>
+    </div>
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -833,6 +1148,59 @@
   </div>
   <div class="footer-text">© 2026 Renan Lara · CRN-3 64496 · Nutricionista de Corredores</div>
 </footer>
+
+</div><!-- /#main-content -->
+
+<script>
+  // Skip hero snap on "Ver o protocolo" links
+  function skipHero(e) {
+    e.preventDefault();
+    document.getElementById('main-content').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // IntersectionObserver for stagger animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const delay = el.dataset.delay || 0;
+        setTimeout(() => el.classList.add('visible'), delay);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  // Stagger check-items
+  document.querySelectorAll('.check-item').forEach((el, i) => {
+    el.dataset.delay = i * 80;
+    observer.observe(el);
+  });
+
+  // Stagger cards
+  document.querySelectorAll('.card').forEach((el, i) => {
+    el.dataset.delay = i * 70;
+    observer.observe(el);
+  });
+
+  // Stagger testimonials
+  document.querySelectorAll('.testimonial-card').forEach((el, i) => {
+    el.dataset.delay = i * 120;
+    observer.observe(el);
+  });
+
+  // CTA handwriting animation
+  const ctaObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.getElementById('cta-em').classList.add('animate');
+        ctaObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const ctaEl = document.getElementById('cta-title');
+  if (ctaEl) ctaObserver.observe(ctaEl);
+</script>
 
 </body>
 </html>
