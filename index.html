@@ -14,8 +14,8 @@
       --bg3: #161616;
       --border: rgba(255,255,255,0.08);
       --text: #ffffff;
-      --text-dim: #999999;
-      --text-muted: #555555;
+      --text-dim: #bbbbbb;
+      --text-muted: #777777;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -414,7 +414,7 @@
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 80px;
       font-weight: 900;
-      color: rgba(230,48,18,0.4);
+      color: var(--red);
       line-height: 1;
       margin-bottom: 16px;
     }
@@ -849,6 +849,71 @@
       footer { padding: 24px 20px; flex-direction: column; gap: 12px; text-align: center; }
     }
 
+    /* ── CARD HOVER ── */
+    .card {
+      transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      border: 1px solid transparent;
+    }
+    .card:hover {
+      border-color: var(--red);
+      box-shadow: 0 0 0 1px rgba(230,48,18,0.15), inset 0 0 40px rgba(230,48,18,0.04);
+    }
+    .card:hover .card-icon {
+      transform: translateY(-4px);
+      transition: transform 0.25s ease;
+    }
+    .card-icon { transition: transform 0.25s ease; }
+
+    /* ── STEPS CONNECTOR ── */
+    .steps {
+      position: relative;
+    }
+    .steps-connector {
+      position: absolute;
+      top: 40px;
+      left: calc(33.333% / 2);
+      width: calc(100% - 33.333%);
+      height: 1px;
+      overflow: visible;
+      pointer-events: none;
+    }
+    .steps-connector line {
+      stroke: var(--red);
+      stroke-width: 1;
+      stroke-dasharray: 800;
+      stroke-dashoffset: 800;
+      transition: stroke-dashoffset 1.2s ease;
+      opacity: 0.4;
+    }
+    .steps-connector.animate line {
+      stroke-dashoffset: 0;
+    }
+
+    /* ── CHECK ICON SCALE ── */
+    .check-icon {
+      transition: transform 0.3s ease;
+    }
+    .check-item.visible .check-icon {
+      animation: popIn 0.3s ease both;
+    }
+    @keyframes popIn {
+      0%   { transform: scale(0.5); opacity: 0; }
+      70%  { transform: scale(1.2); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* ── STAT COUNTER ── */
+    .stat-num { transition: color 0.3s ease; }
+
+    /* ── SCIENCE CARD HOVER ── */
+    .science-card {
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    .science-card:hover {
+      border-color: rgba(230,48,18,0.4);
+      transform: translateY(-4px);
+    }
+
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -1032,7 +1097,10 @@
 <section>
   <div class="section-label">Como funciona</div>
   <h2 class="section-title">Simples,<br><em>rápido e preciso</em></h2>
-  <div class="steps">
+  <div class="steps" id="steps-container">
+    <svg class="steps-connector" id="steps-connector" viewBox="0 0 800 1" preserveAspectRatio="none">
+      <line x1="0" y1="0" x2="800" y2="0"/>
+    </svg>
     <div class="step">
       <div class="step-num">01</div>
       <span class="step-icon">📝</span>
@@ -1237,6 +1305,58 @@
 
   const ctaEl = document.getElementById('cta-title');
   if (ctaEl) ctaObserver.observe(ctaEl);
+
+  // Steps connector line draw
+  const stepsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.getElementById('steps-connector').classList.add('animate');
+        stepsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  const stepsEl = document.getElementById('steps-container');
+  if (stepsEl) stepsObserver.observe(stepsEl);
+
+  // Counter animation for stats
+  function animateCounter(el, target, suffix) {
+    const duration = 1200;
+    const start = performance.now();
+    const isDecimal = String(target).includes('.');
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const val = isDecimal ? (target * ease).toFixed(1) : Math.round(target * ease);
+      el.textContent = val + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const statDefs = [
+    { suffix: '+', target: 15 },
+    { suffix: 'MIN', target: 5 },
+    { suffix: '%', target: 100 },
+    { suffix: '', target: 'CRN' },
+  ];
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const nums = entry.target.querySelectorAll('.stat-num');
+        nums.forEach((el, i) => {
+          const def = statDefs[i];
+          if (typeof def.target === 'number') {
+            setTimeout(() => animateCounter(el, def.target, def.suffix), i * 150);
+          }
+        });
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  const statsEl = document.querySelector('.stats');
+  if (statsEl) statsObserver.observe(statsEl);
 </script>
 
 </body>
